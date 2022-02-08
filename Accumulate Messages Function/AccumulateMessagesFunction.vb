@@ -2,13 +2,14 @@
 'RCET0265
 'Spring 2022
 'Accumulate Messages Function
-'url
+'https://github.com/MEBreves/AccumulateMessagesFunction
 
 Option Strict On
 Option Explicit On
 
 Module AccumulateMessagesFunction
 
+    'A function that retains and concatenates messages for the user. The messages can be cleared.
     Function UserMessages(ByVal newMessage As String, ByVal clear As Boolean) As String
 
         'Declaring function variable
@@ -24,6 +25,7 @@ Module AccumulateMessagesFunction
 
     End Function
 
+    'A function that checks if the user input is a "y" or "n" for yes or no, then returns a true or false value.
     Function CheckInputsForBoolean(ByVal input As String) As Boolean
 
         Dim endLoop As Boolean = False
@@ -63,32 +65,36 @@ Module AccumulateMessagesFunction
 
             Do While stillCreatingMessages
 
+                'Getting a message from the user and storing it in the message list
                 Console.WriteLine("-----------------------------------------------------------------------")
                 Console.WriteLine("Please enter a message.")
                 Console.Write("> ")
                 message = Console.ReadLine()
                 messageList = UserMessages(message, emptyMessages)
-
                 Console.WriteLine()
+
+                'Asking the user if they want to add another message and re-running the loop if so
                 Console.WriteLine("Would you like to add another message? Y / N")
                 Console.Write("> ")
                 userInput = Console.ReadLine()
-
                 stillCreatingMessages = CheckInputsForBoolean(userInput)
                 Console.WriteLine()
 
             Loop
 
-            stillCreatingMessages = True    'The variable is reset to true so that another iteration of the loop can happen later
+            stillCreatingMessages = True    'The variable is reset to true so that if the messages program loops this will run again
 
+            'Displaying the accumulated messages to the user
             Console.WriteLine("Here are your messages:")
             Console.WriteLine(messageList)
 
+            'Asking the user if they want their messages cleared
             Console.WriteLine("Would you like to clear your messages? Y / N")
             Console.Write("> ")
             userInput = Console.ReadLine()
             emptyMessages = CheckInputsForBoolean(userInput)
 
+            'Emptying the user messsages if true; the user will be notified if it happens
             If emptyMessages Then
 
                 UserMessages("", emptyMessages) 'Clearing the messages if the user said yes
@@ -97,6 +103,7 @@ Module AccumulateMessagesFunction
 
             End If
 
+            'Asking if the user wants to re-run the program and then either re-running or ending the loop
             Console.WriteLine(vbNewLine & "Would you like to keep using the message program? Y / N")
             Console.Write("> ")
             userInput = Console.ReadLine()
@@ -106,6 +113,7 @@ Module AccumulateMessagesFunction
 
         Loop
 
+        'Allowing the user to see the end of the program instead of just turning off.
         Console.WriteLine("-----------------------------------------------------------------------")
         Console.WriteLine("Please press Enter to exit the program.")
         Console.ReadLine()
