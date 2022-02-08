@@ -15,10 +15,12 @@ Module AccumulateMessagesFunction
         'Declaring function variable
         Static allMessages As String
 
+        newMessage = newMessage.Trim()
+
         If clear Then
             allMessages = ""
-        Else
-            allMessages += newMessage.Trim() & vbNewLine
+        ElseIf newMessage <> "" Then
+            allMessages += newMessage & vbNewLine
         End If
 
         Return allMessages
