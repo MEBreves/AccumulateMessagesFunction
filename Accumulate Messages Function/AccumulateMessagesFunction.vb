@@ -18,7 +18,7 @@ Module AccumulateMessagesFunction
         If clear Then
             allMessages = ""
         Else
-            allMessages += newMessage & vbNewLine
+            allMessages += newMessage.Trim() & vbNewLine
         End If
 
         Return allMessages
